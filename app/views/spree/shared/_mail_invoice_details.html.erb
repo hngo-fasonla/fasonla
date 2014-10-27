@@ -1,0 +1,42 @@
+<% @invoice = Invoice.search(order_id_eq: @order.id).result.first %>
+<% if @invoice != nil %>
+	<div style="text-align: center; color: blue; width: 800px; margin-bottom: 10px">
+	    <h2><%= t('invoice.invoice_info_title') %></h2>
+	</div>
+	<div style="float: left; font-size: larger" align="right">
+	    <%= t('invoice.tax_code') %>
+	</div>
+	<div style="height: 25px; padding-left: 250px; font-size: larger; margin-bottom: 10px">
+	    <%= @invoice.tax_code %>
+	</div>
+	<div style="float: left; font-size: larger" align="right">
+	    <%= t('invoice.company_name') %>
+	</div>
+	<div style="height: 25px; padding-left: 250px; font-size: larger; margin-bottom: 10px">
+	    <%= @invoice.company_name %>
+	</div>
+	<div style="float: left; font-size: larger" align="right">
+	    <%= t('invoice.address_company') %>
+	</div>
+	<div style="height: 25px; padding-left: 250px; font-size: larger; margin-bottom: 10px">
+	    <%= @invoice.address_company %>
+	</div>
+	<div style="float: left; font-size: larger" align="right">
+	    <%= t('invoice.address_receiver') %>
+	</div>
+	<div style="height: 25px; padding-left: 250px; font-size: larger; margin-bottom: 10px">
+	    <%= @invoice.address_receiver %>
+	</div>
+	<div style="float: left; font-size: larger" align="right">
+	    <%= t('invoice.receiver_name') %>
+	</div>
+	<div style="height: 25px; padding-left: 250px; font-size: larger; margin-bottom: 10px">
+	    <%= @invoice.receiver_name %>
+	</div>
+	<div style="float: left; font-size: larger" align="right">
+	    <%= t('invoice.receiver_phone') %>
+	</div>
+	<div style="height: 25px; padding-left: 250px; font-size: larger; margin-bottom: 10px">
+	    <%= @invoice.receiver_phone %>
+	</div>
+<% end %>

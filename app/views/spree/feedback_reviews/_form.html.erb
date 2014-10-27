@@ -1,0 +1,83 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#yes-helpful-<%= review.id %>").click(function(){
+			$obj = $(this);
+			var helpfuls = {
+				"review_id" : <%= review.id %>,
+				"is_helpful" : true
+			};
+			$.ajax({
+				url: "/spree/feedback_reviews/create",
+				data : {
+					"helpfuls" : helpfuls
+				},
+				type: "GET",
+				dataType : "json",
+				success : function(data) {
+					$obj.closest("#helpful").html('<div style="color: #00ADEE"><%= t('review.thank_feedback') %></div>');
+					if(data != false){
+						var total = data.non_helpful + data.is_helpful;
+						$("#value-helpful-<%= review.id %>").html("<span id='value-helpful'><b>" + data.is_helpful +"</b></span>");
+						$("#total-helpful-<%= review.id %>").html("<span id='value-helpful'><b>" + total +"</b></span>");
+					}
+				},
+				error : function() {
+					alert("error");
+				}
+			});
+		});
+		$("#no-helpful-<%= review.id %>").click(function(){
+			$obj = $(this);
+			var helpfuls = {
+				"review_id" : <%= review.id %>,
+				"is_helpful" : false
+			};
+			$.ajax({
+				url: "/spree/feedback_reviews/create",
+				data : {
+					"helpfuls" : helpfuls
+				},
+				type: "GET",
+				dataType : "json",
+				success : function(data) {
+					$obj.closest("#helpful").html('<div style="color: #00ADEE"><%= t('review.thank_feedback') %></div>');
+					if(data != false){
+						var total = data.non_helpful + data.is_helpful;
+						$("#value-helpful-<%= review.id %>").html("<span id='value-helpful'><b>" + data.is_helpful +"</b></span>");
+						$("#total-helpful-<%= review.id %>").html("<span id='value-helpful'><b>" + total +"</b></span>");
+					}
+				},
+				error : function() {
+					alert("error");
+				}
+			});
+		});
+	});
+</script>
+
+<div id="helpful-result" style="color: #888!important;">
+	<span id="value-helpful-<%= review.id %>"><b><%= review.is_helpful.to_i %></b></span>
+	<%= t('review.of') %>
+	<span id="total-helpful-<%= review.id %>"><b><%= review.non_helpful.to_i + review.is_helpful.to_i %></b></span>
+	<%= t('review.helpful') %>
+</div>
+
+<div id="helpful" style="margin-top: 5px; margin-bottom: 30px">
+	<div>
+	    <%= form_for((@feedback_review ||= review.feedback_reviews.build), :url => feedback_reviews_path(review), :method => :post, :remote => true) do |f| %>
+		    <% unless @feedback_review.errors.empty? %>
+			    <span class="error"><%= @feedback_review.errors[:rating] %></span>
+			    <br />
+		    <% end %>
+	    <% end %>
+    </div>
+    <div>
+        <%= Spree.t(:was_this_review_helpful) %>
+        <button id="yes-helpful-<%= review.id %>" class="feedback-review">
+            <%= Spree.t(:say_yes) %>
+        </button>
+        <button id="no-helpful-<%= review.id %>" class="feedback-review">
+            <%= Spree.t(:say_no) %>
+        </button>
+    </div>
+</div>

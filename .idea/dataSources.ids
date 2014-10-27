@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails fasonla: development" uuid="76ea76a5-4482-48e9-965b-39d3b56ff48f">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails fasonla: test" uuid="aace1ded-9f23-4fce-8caf-8effd2693ab2">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails spree1: development" uuid="9ade6a8e-ae80-4a2c-ad17-a64f491ec9df">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails spree1: test" uuid="de364dbb-89c1-433c-ab89-7dfd335fe70b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails blog: development" uuid="a2f1fd54-73a0-4826-9419-c1d327967f16">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails fa-store: development" uuid="765bb019-7b3d-47f2-a42c-0aea946ce151">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails fa-store: test" uuid="9b85d1c4-196e-4467-836b-f043733e634c">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails fa-store: production" uuid="bdc13d45-abe2-4187-9b56-5f4c45292921">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>

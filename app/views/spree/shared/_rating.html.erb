@@ -1,0 +1,33 @@
+<% stars_f = product.avg_rating.round(1) %>
+<% reviews_count = product.reviews_count %>
+<% percent = stars_f*100/5 %>
+
+<% reviews_count = product.reviews_count %>
+<% stars = product.stars %>
+
+<div class="ratings">
+  <div class="ratings-stars" style="float: left; margin-right: 5px">
+    <span title="<%= txt_stars(stars) %>">
+      <%= render 'spree/reviews/stars', :stars => stars %>
+    </span>
+  </div>
+  
+  <% if defined? is_prod_view %>
+  	<div class="ratings-basedupon">
+    	<label><b><%= stars %></b></label>
+    	<label style="color: #888!important"> from </label>
+	    <span class="reviews-all"><b><%= reviews_count %> reviews</b></span>
+  	</div>
+  <% else %>
+	<div class="ratings-basedupon">
+	    <label><b><%= stars %></b></label>
+	    <label style="color: #888!important"> from </label>
+	    <span class="reviews-all"><b><%= reviews_count %> reviews</b></span>
+	  </div>
+  <% end %>
+  
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <meta itemprop="ratingValue" content="<%= stars %>" />
+    <meta itemprop="reviewCount" content="<%= reviews_count %>" />
+  </div>
+</div>

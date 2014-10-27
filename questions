@@ -1,0 +1,2 @@
+In config/routes.rb, why don't we use "resources ratings"? What is the purpose of having ratings/index, ratings/create
+

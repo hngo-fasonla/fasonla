@@ -1,0 +1,53 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#ratings").click(function(){
+			<% if defined? edit_enabled %>
+				var star = $(':radio:checked').val();
+				var ratings = {
+					"product_id" : <%= @product.id %>,
+					"user_id" : <%= spree_current_user.id %>,
+					"rating" : star
+				};
+				$.ajax({
+					url: "/ratings/create",
+					data : {
+						"ratings" : ratings
+					},
+					type: "GET",
+					dataType : "json",
+					success : function(data) {
+					},
+					error : function() {
+						alert("error");
+					}
+				});
+			<% end %>
+		});
+	});
+</script>
+
+<% if defined? edit_enabled
+    state = ""
+    name  = "review[rating]"
+  else
+    state = 'disabled'
+    name  = defined?(review).nil? ? Time.now.tv_usec.to_s : "review_#{review}"
+  end %>
+  
+<div id="ratings">
+	<% if defined? edit_enabled %>
+		<% for i in 1..NB_STARS %>
+		  <input  name="<%= name %>"
+		         type="radio" class="star"
+		         value="<%= i %> stars" <%= state %>
+		         <%= "checked" if i == stars %> />
+		<% end %>
+	<% else %>
+		<% for i in 1..NB_STARS %>
+		  <input  name="<%= name %>"
+		         type="radio" class="star"
+		         value="<%= stars %> out of 5 stars" <%= state %>
+		         <%= "checked" if i == stars %> />
+		<% end %>
+	<% end %>
+</div>

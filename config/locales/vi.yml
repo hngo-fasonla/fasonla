@@ -1,0 +1,36 @@
+
+vi:
+  review:
+    customer_reviews: "Đánh giá sản phẩm"
+    review_most_helpful: "Các đánh giá tốt nhất"
+    your_reviews: "Đánh giá sản phẩm của bạn"
+    review_orther_purchases: "Các sản phẩm đã mua khác"
+    review_exist: "Bạn đã viết đánh giá cho sản phẩm này"
+    purchase_required: "Bạn chưa mua sản phẩm này. Bạn cần có một tài khoản đã mua thành công sản phẩm này để viết đánh giá sản phẩm"
+    thank_feedback: "Bạn đã gửi phản hồi thành công"
+    by: "Bởi"
+    of: "trên"
+    helpful: "người bình chọn đánh giá này hữu ích"
+  rating:
+    points: "điểm"
+  invoice:
+    export_bill_invoice: "Xuất hoá đơn đỏ(VAT)"
+    invoice_info_title: "Thông tin xuất hoá đơn đỏ(VAT)"
+    input_required_title: "Vui lòng nhập đủ thông tin bên dưới"
+    tax_code: "Mã số thuế"
+    help_block_tax_code: "Trang web sẽ tự động tìm thông tin công ty trong hệ thống"
+    company_name: "Tên công ty"
+    address_company: "Địa chỉ công ty"
+    address_receiver: "Địa chỉ nhận hoá đơn"
+    receiver_name: "Họ tên người nhận hóa đơn"
+    receiver_phone: "Số điện thoại người nhận hoá đơn"
+  mailer:
+    customer_name: "Tên khách hàng:"
+    customer_phone: "Số điện thoại:"
+    email: "Email:"
+    title_order_detail: "Chi tiết đơn đặt hàng"
+  error:
+    title: "Website đang gặp sự cố"
+    content: "Ban quản trị website đang khắc phục sự cố, quý khách vui lòng trở lại sau. Cám ơn!"
+  emailer_error:
+    subject: "Lỗi trang fasonla"

@@ -1,0 +1,22 @@
+<div style="margin-bottom: 10px">
+	<%= content_tag :h2, t('review.your_reviews'), :class => 'new-review-title' %>
+</div>
+<%= render "spree/shared/error_messages", :target => review %>
+
+<% if defined? review_exist %>
+	<%= render 'review_exist' %>
+<% else %>
+	<%= render 'purchase_required' %>
+<% end %>
+
+<div style="text-align: center; width: 140px; height: 160px">
+	<div>
+	    <%= small_image( @product, :itemprop => "image") %>
+	</div>
+	<div style="font-weight: bold">
+		<%= link_to @product.name, product_path(@product) %>
+	</div>
+</div>
+
+<%= render 'other_purchases' %>
+

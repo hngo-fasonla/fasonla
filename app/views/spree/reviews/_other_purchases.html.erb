@@ -1,0 +1,18 @@
+<div style="font-size: 16pt; font-weight: bold; height: 35px">
+	<%= t('review.review_orther_purchases') %>
+</div>
+<div>
+	<% @fa_product_purchases .each do |product| %>
+		<div style="float: left; width: 150px; text-align: center; margin-right: 30px; font-weight: bold; margin-bottom: 15px">
+			<div style="height: 115px">
+			    <%= small_image( product, :itemprop => "image") %>
+			</div>
+			<div style="height: 25px">
+				<%= product.name %>
+			</div>
+			<div>
+				<%= link_to Spree.t(:ReviewThisProduct), new_product_review_path(product) %>
+			</div>
+		</div>
+	<% end %>
+</div>

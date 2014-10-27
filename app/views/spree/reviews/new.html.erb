@@ -1,0 +1,13 @@
+<% if Spree::Reviews::Config[:require_login] == true %>
+		
+	<% if @fa_purchases_exist == 1 %>
+		<% if @fa_check_review == true %>
+			<%= render 'form_case_reviews', :review => @review, :product => @product, :review_exist => true %>
+		<% else %>
+			<%= content_tag :h2, Spree.t(:leave_us_a_review_for, :name => @product.name), :class => 'new-review-title' %>
+			<%= render 'form', :review => @review, :product => @product %>
+		<% end %>	
+	<% else %>
+		<%= render 'form_case_reviews', :review => @review, :product => @product %>
+	<% end %>
+<% end %>

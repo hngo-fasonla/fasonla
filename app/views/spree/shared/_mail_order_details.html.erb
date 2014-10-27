@@ -1,0 +1,77 @@
+
+<table id='line-items' cellspacing="0" width="100%">
+	<col width="15%"> 
+    <col width="55%">
+    <col width="10%">
+    <col width="10%">
+    <col width="10%">
+
+    <tr style="background-color: #D9D9DB; height: 25px">
+        <td colspan="2" align="center" style="background-color: #D9D9DB"><b><%= Spree.t(:item) %></b></td>
+        <td style="background-color: #D9D9DB"><b><%= Spree.t(:price) %></b></td>
+        <td style="background-color: #D9D9DB; padding-left: 15px"><b><%= Spree.t(:qty) %></b></td>
+        <td style="background-color: #D9D9DB"><b><span><%= Spree.t(:total) %></span></b></td>
+    </tr>
+
+    <% @order.line_items.each do |item| %>
+	    <tr style="color: #00adee; height: 65px">
+	        <td style="color: #00adee; padding-left: 10px">
+	        	<% if item.variant.images.length == 0 %>
+		            <%= link_to small_image(item.variant.product), root_url + product_path(item.variant.product) %>
+	          	<% else %>
+	          		<%= link_to image_tag(attachments[item.variant.images.first.attachment.url(:mini, false)].url), root_url + product_path(item.variant.product) %>
+	          	<% end %>
+        	</td>
+        	<td><b><%= link_to item.variant.product.name, root_url + product_path(item.variant.product) %></b></td>
+	        <td style="color: #00adee"><b><%= item.single_money.to_html %></b></td>
+	        <td style="color: #111111; padding-left: 15px"><%= item.quantity %></td>
+	        <td style="color: #00adee"><b><%= item.display_amount.to_html %></b></td>
+	    </tr>
+    <% end %>
+    
+    <tr style="background-color: #00ADEE; color: #FFFFFF; height: 25px">
+        <td colspan="4" align="right" style="padding-right: 40px"><b><%= Spree.t(:subtotal) %>:</b></td>
+        <td><b><%= @order.display_item_total.to_html %></b></td>
+    </tr>
+
+    <% if @order.line_item_adjustments.exists? %>
+    <% if order.all_adjustments.promotion.eligible.exists? %>
+    <% order.all_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
+    <tr height="40px" style="color: #727276">
+        <td colspan="4" align="right" style="padding-right: 40px"><%= Spree.t(:promotion) %>: <strong><%= label %></strong></td>
+        <td><b><%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency) %></b></td>
+    </tr>
+    <% end %>
+    <% end %>
+    <% end %>
+
+    <% order.shipments.group_by { |s| s.selected_shipping_rate.name }.each do |name, shipments| %>
+    <tr height="40px" style="color: #727276">
+        <td colspan="4" align="right" style="padding-right: 40px"><%= Spree.t(:shipping) %>: <strong><%= name %></strong></td>
+        <td><b><%= Spree::Money.new(shipments.sum(&:discounted_cost), currency: order.currency).to_html %></b></td>
+    </tr>
+    <% end %>
+
+    <% if order.all_adjustments.tax.exists? %>
+    <% order.all_adjustments.tax.group_by(&:label).each do |label, adjustments| %>
+    <tr height="40px" style="color: #727276">
+        <td colspan="4" align="right" style="padding-right: 40px"><%= Spree.t(:tax) %>: <strong><%= label %></strong></td>
+        <td><b><%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency) %></b></td>
+    </tr>
+    <% end %>
+    <% end %>
+
+    <% @order.adjustments.eligible.each do |adjustment| %>
+    <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+    <tr height="40px" style="color: #727276">
+        <td colspan="4" align="right" style="padding-right: 40px"><strong><%= adjustment.label %></strong></td>
+        <td><b><%= adjustment.display_amount.to_html %></b></td>
+    </tr>
+    <% end %>
+    
+    <tr style="background-color: #00ADEE; color: #FFFFFF; height: 25px">
+        <td colspan="4" align="right" style="padding-right: 40px"><b><%= Spree.t(:order_total) %>:</b></td>
+        <td><b><%= @order.display_total.to_html %></b></td>
+    </tr>
+
+</table>

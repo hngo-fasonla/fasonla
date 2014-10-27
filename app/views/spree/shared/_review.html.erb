@@ -1,0 +1,34 @@
+<div style="width: 940px">
+    <div style="float: left; height: 20px; padding-right: 5px" class="reviews-rating" title="<%= txt_stars(review.rating) %>"> 
+    	<%= render "spree/reviews/stars", :stars => review.rating %> 
+	</div>
+    <div itemprop="name" style="height: 20px; font-size: 13px">
+        <b><%= review.title %></b>
+    </div>
+    <div>
+        <%= t('review.by') %>
+        <% if review.user_id %>
+	        <% if Spree::Reviews::Config[:show_email] && review.user %>
+	        	<span><b><%= review.user.email %></b></span>
+	        <% else %>
+	        	<span><b><%= review.name %></b></span>
+	        <% end %>
+        <% else %>
+        	<span class="author-review"><%= Spree.t(:anonymous) %></span>
+        <% end %>
+
+        <span class="attribution" style="color: #888!important"><%= t('submitted_on') %> <strong><%= l review.created_at.to_date %></strong></span>
+        <meta itemprop="datePublished" content="<%= review.created_at.to_date.to_s %>" />
+
+        <meta itemprop="reviewRating" content="<%= review.rating %>" />
+    </div>
+
+    <div style="margin-top: 15px; margin-bottom: 10px">
+        <%= simple_format(review.review, {}, wrapper_tag: "div") %>
+    </div>
+    <% if Spree::Reviews::Config[:feedback_rating] %>
+    <div class="feedback_review" id="feedback_review_<%= review.id %>">
+        <%= render "spree/feedback_reviews/form", :review => review %>
+    </div>
+    <% end %>
+</div>

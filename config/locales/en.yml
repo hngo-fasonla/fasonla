@@ -1,0 +1,37 @@
+
+en:
+  review:
+    customer_reviews: "Customer Reviews"
+    review_most_helpful: "Most Helpful Customer Reviews"
+    your_reviews: "Your Reviews"
+    review_orther_purchases: "Review your other purchases"
+    review_exist: "You already exists review of this product"
+    purchase_required: "You need to use an account that has successfully been charged for a purchase"
+    thank_feedback: "Thank you for your feedback"
+    by: "By"
+    of: "of"
+    helpful: "people found the following review helpful"
+  rating:
+    points: "points"
+  invoice:
+    export_bill_invoice: "Export red invoices (VAT)"
+    invoice_info_title: "Information invoices Red (VAT)"
+    input_required_title: "Please enter the information below"
+    tax_code: "Tax code"
+    help_block_tax_code: "The website will automatically find corporate information system"
+    company_name: "Company Name"
+    address_company: "Address company"
+    address_receiver: "Invoice address receiver"
+    receiver_name: "Invoice name receiver"
+    receiver_phone: "Invoice phone receiver"
+  mailer:
+    customer_name: "Customer name:"
+    customer_phone: "Phone:"
+    email: "Email:"
+    title_order_detail: "Order detail"
+  error:
+    title: "Website is having an error"
+    content: "Admin are site troubleshooting, please come back later. Thank you!"
+  emailer_error:
+    subject: "Error page fasonla"
+    

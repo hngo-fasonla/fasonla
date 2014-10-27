@@ -1,0 +1,11 @@
+<div class="dialog-error">
+	<div style="margin-bottom: 10px">
+    	<b><%= t('error.title')%></b>
+	</div>
+	<div style="margin-bottom: 40px">
+		<%= t('error.content')%>
+	</div>
+	<div>
+        <%= link_to Spree.t(:back_to_store), spree.root_path, :class => "button" %>
+	</div>
+</div>

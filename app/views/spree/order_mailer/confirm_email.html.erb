@@ -1,0 +1,29 @@
+<div style="float: left; font-size: larger" align="right">
+    <%= t('mailer.customer_name') %>
+</div>
+<div style="height: 25px; padding-left: 140px; font-size: larger">
+    <b><%= Spree::Address.find_by_id(@order.bill_address_id).firstname %>
+    	<%= Spree::Address.find_by_id(@order.bill_address_id).lastname %></b>
+</div>
+<div style="float: left; font-size: larger" align="right">
+    <%= t('mailer.customer_phone') %>
+</div>
+<div style="height: 25px; padding-left: 140px; font-size: larger">
+    <%= Spree::Address.find_by_id(@order.bill_address_id).phone %>
+</div>
+<div style="float: left; font-size: larger" align="right">
+    <%= t('mailer.email') %>
+</div>
+<div style="height: 25px; padding-left: 140px; font-size: larger">
+    <%= @order.email %>
+</div>
+<div style="text-align: center; color: blue; width: 800px ">
+    <h2><%= t('mailer.title_order_detail') %></h2>
+</div>
+
+<%= render :partial => 'spree/shared/mail_order_details', :locals => { :order => @order } %>
+
+<%= render :partial => 'spree/shared/mail_invoice_details', :locals => { :order => @order } %>
+
+<div style="height: 400px">
+</div>

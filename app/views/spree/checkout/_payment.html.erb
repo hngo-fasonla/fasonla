@@ -1,0 +1,140 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#cbx_export_bill_invoice").click(function(){
+			$("#form_bill_invoice").toggle(this.checked);
+		});
+		
+		$("#checkout_form_payment").validate({
+		  	rules:{
+		  		tax_code:{
+		  			required: true
+		  		},
+		  		company_name:{
+		  			required: true
+		  		},
+		  		address_company:{
+		  			required: true
+		  		},
+		  		receiver_name:{
+		  			required: true
+		  		},
+		  		receiver_phone:{
+		  			required: true
+		  		}
+		  	}
+		});
+		
+		$("#save_invoice").click(function(){
+			if ($('#cbx_export_bill_invoice').is(':checked')) {
+				var tax_code = $("#tax_code").val();
+				var company_name = $("#company_name").val();
+				var address_company = $("#address_company").val();
+				var address_receiver = $("#address_receiver").val();
+				var receiver_name = $("#receiver_name").val();
+				var receiver_phone = $("#receiver_phone").val();
+				console.log("++++++++++++++++++++++++++++++++++=");
+				if(tax_code != '' && company_name != '' && address_company != '' && receiver_name != '' && receiver_phone != ''){
+					var invoices = {
+						"order_id" : <%= @order.id %>,
+						"tax_code" : tax_code,
+						"company_name" : company_name,
+						"address_company" : address_company,
+						"address_receiver" : address_receiver,
+						"receiver_name" : receiver_name,
+						"receiver_phone" : receiver_phone
+					};
+					$.ajax({
+						url: "/invoice/create",
+						data : {
+							"invoices" : invoices
+						},
+						type: "GET",
+						dataType : "json",
+						success : function(data) {
+						},
+						error : function() {
+						}
+					});
+				}
+			}
+		});
+		
+	});
+</script>
+
+<fieldset id="payment" data-hook>
+  <legend align="center"><%= Spree.t(:payment_information) %></legend>
+  <div data-hook="checkout_payment_step">
+    <% @order.available_payment_methods.each do |method| %>
+    <p>
+      <label>
+        <%= radio_button_tag "order[payments_attributes][][payment_method_id]", method.id, method == @order.available_payment_methods.first %>
+        <%= Spree.t(method.name, :scope => :payment_methods, :default => method.name) %>
+      </label>
+    </p>
+    <% end %>
+
+    <ul id="payment-methods" data-hook>
+      <% @order.available_payment_methods.each do |method| %>
+        <li id="payment_method_<%= method.id %>" class="<%= 'last' if method == @order.available_payment_methods.last %>" data-hook>
+          <fieldset>
+            <%= render :partial => "spree/checkout/payment/#{method.method_type}", :locals => { :payment_method => method } %>
+          </fieldset>
+        </li>
+      <% end %>
+    </ul>
+    
+    <div class='field' data-hook='coupon_code' style="margin-bottom: 35px">
+		<%= form.label :coupon_code %><br />
+		<%= form.text_field :coupon_code %>
+	</div>
+      
+  </div>
+  
+  <div id="invoice">
+  	<div style="margin-bottom: 10px; font-weight: bold">
+		<input type="checkbox" id="cbx_export_bill_invoice"> <%= t('invoice.export_bill_invoice') %>
+	</div>
+	<div id="form_bill_invoice" style="display: none">
+		<div style="color: #00adee; font-weight: bold; font-size: 14px">
+			<%= t('invoice.invoice_info_title') %>
+		</div>
+		<div style="margin-bottom: 10px; font-style: italic">
+	    	<span class="required">*</span> <%= t('invoice.input_required_title') %>
+	    </div>
+	    <div id="invoice-info">
+	        <p>
+	            <label for="tax_code"><%= t('invoice.tax_code') %> <span class="required">*</span></label></br>
+	            <input type="text" id="tax_code" class="required" name="tax_code"></br>
+	            <span style="font-size: 11px; color: #737373"><%= t('invoice.help_block_tax_code') %></span>
+	        </p>
+	        <p>
+	            <label for="company_name"><%= t('invoice.company_name') %> <span class="required">*</span></label></br>
+	        	<input type="text" id="company_name" name="company_name">
+	    	</p>
+	        <p>
+	            <label for="address_company"><%= t('invoice.address_company') %> <span class="required">*</span></label></br>
+	            <input type="text" id="address_company" name="address_company">
+	        </p>
+	        <p>
+	            <label for="address_receiver"><%= t('invoice.address_receiver') %></label></br>
+	            <input type="text" id="address_receiver">
+	        </p>
+	        <p>
+	            <label for="receiver_name"><%= t('invoice.receiver_name') %> <span class="required">*</span></label></br>
+	            <input type="text" id="receiver_name" name="receiver_name">
+	        </p>
+	        <p>
+	            <label for="receiver_phone"><%= t('invoice.receiver_phone') %> <span class="required">*</span></label></br>
+	            <input type="text" id="receiver_phone" name="receiver_phone">
+	        </p>                                    
+	    </div>
+    </div>
+  </div>
+</fieldset>
+
+<br class="space" />
+
+<div class="form-buttons" data-hook="buttons">
+  <%= submit_tag Spree.t(:save_and_continue), :class => 'continue button primary', :id => 'save_invoice' %>
+</div>
